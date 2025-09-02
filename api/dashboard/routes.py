@@ -44,3 +44,22 @@ async def dashboard_page(request: Request, db: Session = Depends(get_db)):
     
     else:
         return templates.TemplateResponse("dashboard_karyawan.html", {"request": request})
+    
+
+@router.get("/user", response_class=HTMLResponse)
+async def user_dashboard(request: Request, db: Session = Depends(get_db)):
+    templates = request.app.state.templates
+
+    return templates.TemplateResponse(
+        "users.html",
+        {"request": request}
+    )
+
+@router.get("/user/tambah", response_class=HTMLResponse)
+async def add_user_page(request: Request):
+    templates = request.app.state.templates
+
+    return templates.TemplateResponse(
+        "users_form.html",
+        {"request": request}
+    )
